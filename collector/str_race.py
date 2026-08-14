@@ -1891,6 +1891,7 @@ async def housekeeping(
     stop_event: asyncio.Event,
     args: argparse.Namespace,
     start_time: float,
+    start_monotonic: float,
     race_sink=None,
 ) -> None:
     last_heartbeat = loop_time()
@@ -1915,12 +1916,12 @@ async def housekeeping(
 
         # Save state after every confirmed race for crash recovery
         if closed_confirmed:
-            save_state(pools, tracker, start_time=start_time)
+            save_state(pools, tracker, start_time=start_monotonic)
 
         now = loop_time()
         if tracker.tracking_enabled and (now - last_heartbeat) >= HEARTBEAT_INTERVAL:
             last_heartbeat = now
-            uptime_s = int(now - start_time)
+            uptime_s = int(now - start_monotonic)
             h, rem = divmod(uptime_s, 3600)
             m, _ = divmod(rem, 60)
             confirmed = sum(1 for r in tracker.all_races if r.confirmed)
@@ -2526,12 +2527,13 @@ async def run(args: argparse.Namespace, race_sink=None, stop_event=None) -> None
     print()
 
     start_epoch = time.time()
+    start_monotonic = loop_time()
 
     tasks = [
         asyncio.create_task(pool_worker(pc.name, pc.host, pc.port, args.user, tracker, pools, stop_event))
         for pc in pool_configs
     ]
-    tasks.append(asyncio.create_task(housekeeping(tracker, pools, stop_event, args, start_epoch, race_sink=race_sink)))
+    tasks.append(asyncio.create_task(housekeeping(tracker, pools, stop_event, args, start_epoch, start_monotonic, race_sink=race_sink)))
 
     # Start heartbeat POST loop only if post_url is configured
     if getattr(args, "post_url", None):

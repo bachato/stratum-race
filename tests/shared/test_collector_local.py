@@ -216,7 +216,7 @@ class TestHybridMode:
         with patch.object(str_race, "_post_enriched_result", new_callable=AsyncMock) as mock_post:
             asyncio.create_task(stop_after_short())
             await str_race.housekeeping(
-                tracker, pools, stop_event, args, time.time(), race_sink=test_sink
+                tracker, pools, stop_event, args, time.time(), time.monotonic(), race_sink=test_sink
             )
 
         # Both the sink and the POST should have been called
