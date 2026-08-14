@@ -59,7 +59,12 @@ const vantageStatuses = computed<VantageStatus[]>(() => {
         lastHeartbeatFormatted: formatDatetime(health.last_heartbeat_utc),
       }
     })
-    .sort((a, b) => a.region.localeCompare(b.region))
+    .sort((a, b) => {
+      const orderA = store.vantageDisplay[a.region]?.order ?? 999
+      const orderB = store.vantageDisplay[b.region]?.order ?? 999
+      if (orderA !== orderB) return orderA - orderB
+      return a.region.localeCompare(b.region)
+    })
 })
 
 const hasVantages = computed(() => vantageStatuses.value.length > 0)

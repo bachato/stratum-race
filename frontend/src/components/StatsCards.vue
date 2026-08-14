@@ -104,7 +104,12 @@ const vantageStatuses = computed<VantageStatus[]>(() => {
       label: formatVantage(id),
       healthy,
     }
-  }).sort((a, b) => a.id.localeCompare(b.id))
+  }).sort((a, b) => {
+    const orderA = store.vantageDisplay[a.id]?.order ?? 999
+    const orderB = store.vantageDisplay[b.id]?.order ?? 999
+    if (orderA !== orderB) return orderA - orderB
+    return a.id.localeCompare(b.id)
+  })
 })
 
 const healthyCount = computed(() => vantageStatuses.value.filter(v => v.healthy).length)

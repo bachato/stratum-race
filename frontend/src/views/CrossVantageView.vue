@@ -17,7 +17,12 @@ const vantagePoints = computed<string[]>(() => {
       for (const v of Object.keys(poolAgg.by_vantage)) vantages.add(v)
     }
   }
-  return Array.from(vantages).sort()
+  return Array.from(vantages).sort((a, b) => {
+    const orderA = store.vantageDisplay[a]?.order ?? 999
+    const orderB = store.vantageDisplay[b]?.order ?? 999
+    if (orderA !== orderB) return orderA - orderB
+    return a.localeCompare(b)
+  })
 })
 
 const hasMultipleVantages = computed(() => vantagePoints.value.length >= 2)

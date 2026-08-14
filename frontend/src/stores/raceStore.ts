@@ -68,8 +68,8 @@ export const useRaceStore = defineStore('race', () => {
   /** generated_utc of the currently loaded aggregate (null when from fallback) */
   const aggregateLastUpdated = ref<string | null>(null)
 
-  /** Vantage display data from runtime.json: { [vantageId]: { label, flag?, location? } } */
-  const vantageDisplay = ref<Record<string, { label: string; flag?: string; location?: string }>>({})
+  /** Vantage display data from runtime.json: { [vantageId]: { label, flag?, location?, order? } } */
+  const vantageDisplay = ref<Record<string, { label: string; flag?: string; location?: string; order?: number }>>({})
 
   // ─── Getters ──────────────────────────────────────────────────────────────
 

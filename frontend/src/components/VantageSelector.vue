@@ -12,22 +12,34 @@ const showSelector = computed(() => store.vantageCount >= 2)
 /**
  * Available vantage points derived from vantageHealth state keys
  * or from the leaderboard aggregate data's by_vantage keys.
+ * Sorted by the order field from runtime.json (falls back to alphabetical).
  */
 const availableVantages = computed<string[]>(() => {
   // Primary source: vantageHealth keys
+  let vantages: string[]
   const fromHealth = Object.keys(store.vantageHealth)
-  if (fromHealth.length > 0) return fromHealth.sort()
-
-  // Fallback: extract vantage keys from leaderboard aggregate data
-  const vantageSet = new Set<string>()
-  for (const poolAgg of Object.values(store.leaderboardData)) {
-    if (poolAgg.by_vantage) {
-      for (const v of Object.keys(poolAgg.by_vantage)) {
-        vantageSet.add(v)
+  if (fromHealth.length > 0) {
+    vantages = fromHealth
+  } else {
+    // Fallback: extract vantage keys from leaderboard aggregate data
+    const vantageSet = new Set<string>()
+    for (const poolAgg of Object.values(store.leaderboardData)) {
+      if (poolAgg.by_vantage) {
+        for (const v of Object.keys(poolAgg.by_vantage)) {
+          vantageSet.add(v)
+        }
       }
     }
+    vantages = [...vantageSet]
   }
-  return [...vantageSet].sort()
+
+  // Sort by order field from vantageDisplay, then alphabetically
+  return vantages.sort((a, b) => {
+    const orderA = store.vantageDisplay[a]?.order ?? 999
+    const orderB = store.vantageDisplay[b]?.order ?? 999
+    if (orderA !== orderB) return orderA - orderB
+    return a.localeCompare(b)
+  })
 })
 
 function onSelect(event: Event) {
