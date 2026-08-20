@@ -50,6 +50,29 @@ export default defineConfig(({ mode }) => {
       outDir: 'dist',
       emptyOutDir: true,
     },
+    // In development, proxy /api/* to production so local dev gets real data
+    // except for paths that exist locally in public/ (mock data for dev)
+    server: {
+      proxy: {
+        '/api': {
+          target: 'https://stratumrace.com',
+          changeOrigin: true,
+          secure: true,
+          bypass(req) {
+            // Serve local mock files from public/ when they exist
+            if (req.url === '/api/config/pool-stats-latest.json') {
+              return req.url
+            }
+            if (req.url === '/api/config/pools.json') {
+              return req.url
+            }
+            if (req.url?.startsWith('/api/pool-history/')) {
+              return req.url
+            }
+          },
+        },
+      },
+    },
     test: {
       environment: 'jsdom',
       globals: true,

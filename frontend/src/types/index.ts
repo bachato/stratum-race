@@ -115,6 +115,20 @@ export interface PoolConfig {
   port: number
   operator: string
   groups: string[]
+  // Pool directory fields (optional — added progressively)
+  pool_type?: string
+  payout_type?: string
+  fee_pct?: number
+  fees?: Record<string, number>
+  website_url?: string
+  location?: string
+  stratum_endpoints?: StratumEndpoint[]
+  features?: PoolFeatures
+  software?: { stratum?: string; bitcoin?: string }
+  notes?: string
+  notes_url?: string
+  first_added_utc?: string
+  validation_grace_hours?: number
 }
 
 /** Pool configuration file structure */
@@ -133,6 +147,74 @@ export interface LeaderboardRow {
   tier: 'big' | 'small'
   stats: PoolStats
 }
+
+// ─── Pool Directory Types ─────────────────────────────────────────────────────
+
+export type ValidationStatus = 'verified' | 'warning' | 'critical' | 'inactive' | 'pending'
+
+export interface PoolFeatures {
+  tls: boolean
+  lightning: boolean
+  tor: boolean
+  sv2: boolean
+}
+
+export interface StratumEndpoint {
+  host: string
+  port: number
+  label?: string
+  tls?: boolean
+}
+
+export interface MinerTypeBreakdown {
+  device: string
+  workers: number
+  hashrate_formatted: string
+  best_difficulty_formatted: string
+}
+
+export interface PoolStatSnapshot {
+  hashrate_value: number | null
+  hashrate_formatted: string | null
+  active_users: number | null
+  active_workers: number | null
+  pool_fee: number | null
+  miner_types: MinerTypeBreakdown[] | null
+  fetch_ok: boolean
+  fetch_error?: string
+  fetched_utc: string | null
+  validation_status?: ValidationStatus
+  last_verified_utc?: string | null
+  blocks_found?: number | null
+  recent_blocks?: Array<{
+    height: number
+    timestamp: number
+    date: string
+    payouts: Array<{ address: string; value_btc: number; percentage: number }>
+  }>
+}
+
+export interface PoolStatsLatest {
+  generated_utc: string
+  network_difficulty: number | null
+  pools: Record<string, PoolStatSnapshot>
+}
+
+export interface PoolHistoryPoint {
+  timestamp: number
+  value: number
+  formatted: string
+}
+
+export interface PoolHistoryResponse {
+  pool_name: string
+  metric: string
+  range: string
+  generated_utc: string
+  data: PoolHistoryPoint[]
+}
+
+// ─── WebSocket connection state ───────────────────────────────────────────────
 
 /** WebSocket connection state */
 export type ConnectionStatus = 'connected' | 'connecting' | 'disconnected' | 'polling'

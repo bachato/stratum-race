@@ -44,12 +44,7 @@
       "fees": {
         "TIDES": 2,
         "DATUM": 1
-      },
-      "mempool_slugs": [
-        "ocean"
-      ],
-      "stats_api": "https://ocean.xyz/data/csv/hashrates/pool?range=default",
-      "stats_api_type": "ocean"
+      }
     },
     {
       "name": "antpool",
@@ -78,19 +73,14 @@
         "tor": false,
         "sv2": false
       },
-      "notes": "Offers daily automatic settlement and multiple earnings modes.",
+      "notes": "Offers daily automatic settlement, merged-mining rewards, and multiple earnings modes.",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Large-Scale Global Mining",
-      "description": "AntPool is operated by Bitmain and is one of the largest Bitcoin mining pools by hashrate. It offers FPPS and PPLNS payout modes with daily automatic settlement. Targets professional mining operations with subaccounts and farm management tools.",
+      "description": "AntPool is operated by Bitmain and is one of the largest Bitcoin mining pools by hashrate. It offers FPPS and PPLNS payout modes with daily automatic settlement. The pool supports merged mining for auxiliary coins and targets professional mining operations with subaccounts and farm management tools.",
       "founded": "2014",
       "payout_method": "Account balance with automatic daily wallet payouts. Minimum payout 0.005 BTC.",
       "geographic_presence": "Global with geo-routed endpoints across US, Russia, Germany, Hong Kong, Dubai, and more.",
-      "fees": null,
-      "mempool_slugs": [
-        "antpool"
-      ],
-      "stats_api": "https://www.antpool.com/auth/v3/index/poolcoins",
-      "stats_api_type": "antpool"
+      "fees": null
     },
     {
       "name": "f2pool",
@@ -119,20 +109,17 @@
         "tor": false,
         "sv2": false
       },
-      "notes": "FPPS fee is 4%, PPLNS fee is 2%.",
+      "notes": "FPPS fee is 4%, PPLNS fee is 2%, with auxiliary merged-mining rewards.",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Multi-Coin Mining Since 2013",
-      "description": "F2Pool is one of the longest-running Bitcoin mining pools, operational since 2013. It offers FPPS (4% fee) and PPLNS (2% fee) modes. The pool maintains regional endpoints across six continents with SSL options available.",
+      "description": "F2Pool is one of the longest-running Bitcoin mining pools, operational since 2013. It offers FPPS (4% fee) and PPLNS (2% fee) modes with merged mining rewards for HTR, ELA, NMC, and others. The pool maintains regional endpoints across six continents with SSL options available.",
       "founded": "2013",
       "payout_method": "Account balance with automatic daily on-chain payouts. Lightning withdrawals available for amounts below 0.005 BTC. Minimum payout 0.005 BTC.",
       "geographic_presence": "Regional endpoints in Asia, North America, Europe, Africa, Latin America, plus universal and SSL endpoints.",
       "fees": {
         "FPPS": 4,
         "PPLNS": 2
-      },
-      "mempool_slugs": [
-        "f2pool"
-      ]
+      }
     },
     {
       "name": "viabtc",
@@ -145,7 +132,7 @@
         "all",
         "asia"
       ],
-      "payout_type": "PPS+ / PPLNS",
+      "payout_type": "PPS+ / PPLNS / Solo",
       "fee_pct": 4,
       "website_url": "https://www.viabtc.com/",
       "location": "Global",
@@ -161,20 +148,17 @@
         "tor": false,
         "sv2": false
       },
-      "notes": "PPS+ is the 4% default, PPLNS is 2%.",
+      "notes": "PPS+ is the 4% default, PPLNS is 2%, with merged mining paying several auxiliary coins.",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Flexible Global Reward Modes",
-      "description": "ViaBTC is a major mining pool offering PPS+ and PPLNS modes for Bitcoin. PPS+ charges 4% on the block subsidy component plus 2% on transaction fees; PPLNS is 2%. Solo mining was discontinued in May 2026.",
+      "description": "ViaBTC is a major mining pool offering PPS+, PPLNS, and Solo modes for Bitcoin. PPS+ charges 4% on the block subsidy component plus 2% on transaction fees; PPLNS is 2%. The pool supports merged mining for ELA, NMC, SYS, and FB.",
       "founded": "2016",
       "payout_method": "Account balance with automatic daily wallet payouts. Minimum 0.001 BTC.",
       "geographic_presence": "Global and Europe-specific endpoints with TLS. Exact server cities not disclosed.",
       "fees": {
         "PPS+": 4,
         "PPLNS": 2
-      },
-      "mempool_slugs": [
-        "viabtc"
-      ]
+      }
     },
     {
       "name": "spiderpool",
@@ -203,22 +187,17 @@
         "tor": false,
         "sv2": false
       },
-      "notes": "FPPS fee is 4%, PPLNS fee is 1% with regional TLS endpoints.",
+      "notes": "FPPS fee is 4%, PPLNS fee is 1%, with regional TLS endpoints and merged-mining rewards.",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Regional Mining With TLS",
-      "description": "SpiderPool provides FPPS (4%) and PPLNS (1%) Bitcoin mining with five regional endpoint groups. Each region offers multiple failover ports plus dedicated TLS connections.",
+      "description": "SpiderPool provides FPPS (4%) and PPLNS (1%) Bitcoin mining with five regional endpoint groups. Each region offers multiple failover ports plus dedicated TLS connections. The pool supports merged mining for FB and DMT-NAT.",
       "founded": "2018",
       "payout_method": "Account balance with automatic daily wallet payouts. Minimum 0.005 BTC.",
       "geographic_presence": "Dedicated endpoints in North America, South America, Asia, Europe, and Africa.",
       "fees": {
         "FPPS": 4,
         "PPLNS": 1
-      },
-      "mempool_slugs": [
-        "spiderpool"
-      ],
-      "stats_api": "https://www.spiderpool.com/v1/sp/coin/getPoolInfo",
-      "stats_api_type": "spiderpool"
+      }
     },
     {
       "name": "secpool",
@@ -247,20 +226,17 @@
         "tor": false,
         "sv2": false
       },
-      "notes": "FPPS charges 4% while PPLNS is currently fee-free.",
+      "notes": "FPPS charges 4% while PPLNS is currently fee-free, with merged-mining rewards.",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Multi-Mode Pool With Russian Presence",
-      "description": "SecPool provides FPPS (4%) and PPLNS (0% fee) Bitcoin mining with daily settlement. It maintains universal endpoints plus dedicated Russia-region servers.",
+      "description": "SecPool provides FPPS (4%) and PPLNS (0% fee) Bitcoin mining with daily settlement. It maintains universal endpoints plus dedicated Russia-region servers. The pool supports merged mining for FB and NMC.",
       "founded": null,
       "payout_method": "Account balance with automatic daily wallet payouts. Minimum 0.002 BTC.",
       "geographic_presence": "Universal endpoint plus dedicated Russia servers.",
       "fees": {
         "FPPS": 4,
         "PPLNS": 0
-      },
-      "mempool_slugs": [
-        "secpool"
-      ]
+      }
     },
     {
       "name": "binance_pool",
@@ -296,10 +272,7 @@
       "founded": "2020",
       "payout_method": "Custodial — earnings credited to Binance account balance.",
       "geographic_presence": "Not publicly disclosed.",
-      "fees": null,
-      "mempool_slugs": [
-        "binancepool"
-      ]
+      "fees": null
     },
     {
       "name": "braiins_pool",
@@ -337,10 +310,7 @@
       "geographic_presence": "Global with automatic geographic endpoint selection.",
       "fees": {
         "FPPS": 2.5
-      },
-      "mempool_slugs": [
-        "braiinspool"
-      ]
+      }
     },
     {
       "name": "ckpool",
@@ -378,16 +348,12 @@
       "payout_method": "Direct coinbase (non-custodial). The miner's address is placed directly in the block's coinbase transaction. No account, no withdrawal, no custody.",
       "geographic_presence": "Servers in US-East, US-West, Germany, Singapore, and Australia. Connecting to stratum.ckpool.org automatically routes to the nearest server.",
       "software": {
-        "stratum": "ckpool",
-        "bitcoin": "Bitcoin Core (modified)"
+        "stratum": "ckpool/libckpool (open source)",
+        "bitcoin": "Bitcoin Core"
       },
       "fees": {
         "Solo": 2
-      },
-      "mempool_slugs": [
-        "ckpool",
-        "solock"
-      ]
+      }
     },
     {
       "name": "atlaspool",
@@ -426,8 +392,8 @@
       "payout_method": "Direct coinbase (non-custodial). 98.5% of block reward paid directly to the miner's wallet address.",
       "geographic_presence": "Global anycast with stratum backends in Ashburn VA (US), Portland OR (US), São Paulo (BR), Frankfurt (DE), London (UK), Hong Kong (HK), Mumbai (IN), Sydney (AU), and Cape Town (ZA).",
       "software": {
-        "stratum": "ckpool (modified)",
-        "bitcoin": "Bitcoin Knots (modified)"
+        "stratum": "ckpool",
+        "bitcoin": null
       },
       "fees": {
         "Solo": 1.5
@@ -475,12 +441,7 @@
       "fees": {
         "Solo": 0,
         "PPLNS": 0
-      },
-      "stats_api": "https://public-pool.io:40557/api/info",
-      "stats_api_type": "publicpool",
-      "mempool_slugs": [
-        "publicpool"
-      ]
+      }
     },
     {
       "name": "parasite",
@@ -495,8 +456,8 @@
       ],
       "payout_type": "Hybrid",
       "fee_pct": 0,
-      "website_url": "https://parasite.space/",
-      "location": "Global",
+      "website_url": "https://parasite.wtf/",
+      "location": "US",
       "stratum_endpoints": [
         {
           "host": "parasite.wtf",
@@ -513,22 +474,13 @@
       "notes_url": "https://parasite.wtf/",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Hybrid Finder-Bonus Mining",
-      "description": "Parasite Pool is a community-driven mining pool with a strong Ordinals following. It uses a unique hybrid payout model where the block finder receives 1 BTC directly in the coinbase and the remainder is distributed proportionally. The pool offers custom prizes including ordinals and mining hardware for miners who submit high-difficulty shares.",
+      "description": "Parasite Pool uses a unique hybrid payout model. When a block is found, the finder receives 1 BTC directly in the coinbase transaction. The remaining block reward plus transaction fees are distributed proportionally to all participants based on shares since the last block, paid via Lightning. The pool also runs prize programs awarding ordinals and hardware to miners who submit high-difficulty shares.",
       "founded": "2025",
-      "payout_method": "Hybrid — 1 BTC direct coinbase to the block finder. Remainder distributed proportionally via Lightning or on-chain BTC to the address used as the stratum username.",
+      "payout_method": "Hybrid — 1 BTC direct coinbase to the finder, remainder distributed proportionally via Lightning (minimum 10 sats).",
       "geographic_presence": "Global with nodes in Ashburn (US), Frankfurt (DE), and others.",
       "fees": {
         "Hybrid": 0
-      },
-      "software": {
-        "stratum": "ckpool (modified)",
-        "bitcoin": null
-      },
-      "mempool_slugs": [
-        "parasite"
-      ],
-      "stats_api": "https://parasite.space/api/pool-stats",
-      "stats_api_type": "parasite"
+      }
     },
     {
       "name": "pyblock",
@@ -541,7 +493,7 @@
         "all",
         "americas"
       ],
-      "payout_type": "Solo / SV2 / DATUM",
+      "payout_type": "Solo",
       "fee_pct": 0.4,
       "website_url": "https://pool.pyblock.xyz/",
       "location": "US",
@@ -565,11 +517,10 @@
       "payout_method": "Direct coinbase for Lotto/SV2/CHIRP modes. OCEAN TIDES for DATUM mode.",
       "geographic_presence": "South America (primary) and US-East (Ashburn, VA).",
       "fees": {
-        "Solo": 0.4,
-        "SV2 & CHIRP": 0.9
-      },
-      "stats_api": "https://pool.pyblock.xyz:8443/api.php?mode=pool",
-      "stats_api_type": "pyblock"
+        "Lotto": 0.4,
+        "SV2": 0.9,
+        "CHIRP": 0.9
+      }
     },
     {
       "name": "solomining_de",
@@ -613,9 +564,7 @@
       "geographic_presence": "Germany.",
       "fees": {
         "Solo": 0
-      },
-      "stats_api": "https://pool.solomining.de/api/info",
-      "stats_api_type": "publicpool"
+      }
     },
     {
       "name": "mineshop",
@@ -658,9 +607,7 @@
       },
       "fees": {
         "Solo": 0
-      },
-      "stats_api": "https://solo.mineshop.eu/api/stats.json",
-      "stats_api_type": "mineshop"
+      }
     },
     {
       "name": "bitcoinmerch",
@@ -698,9 +645,7 @@
       "geographic_presence": "Fremont, California (US).",
       "fees": {
         "Solo": 2
-      },
-      "stats_api": "https://pool.bitcoinmerch.com/api/info",
-      "stats_api_type": "publicpool"
+      }
     },
     {
       "name": "2miners_eu",
@@ -730,7 +675,7 @@
         "tor": false,
         "sv2": false
       },
-      "notes": "Stats shown are combined across all 2Miners regions (EU, US, Asia).",
+      "notes": "Regional SSL endpoints, automatic two-hour payouts, monitoring bots, and covered payout fees.",
       "stats_api": "https://solo-btc.2miners.com/api/stats",
       "stats_api_type": "2miners",
       "first_added_utc": "2025-01-01T00:00:00Z",
@@ -771,8 +716,8 @@
         "tor": false,
         "sv2": false
       },
-      "notes": "Stats shown are combined across all 2Miners regions (EU, US, Asia).",
-      "stats_api": "https://solo-btc.2miners.com/api/stats",
+      "notes": "Regional SSL endpoints, automatic two-hour payouts, monitoring bots, and covered payout fees.",
+      "stats_api": "https://us-solo-btc.2miners.com/api/stats",
       "stats_api_type": "2miners",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Three-Region Solo Mining",
@@ -812,8 +757,8 @@
         "tor": false,
         "sv2": false
       },
-      "notes": "Stats shown are combined across all 2Miners regions (EU, US, Asia).",
-      "stats_api": "https://solo-btc.2miners.com/api/stats",
+      "notes": "Regional SSL endpoints, automatic two-hour payouts, monitoring bots, and covered payout fees.",
+      "stats_api": "https://asia-solo-btc.2miners.com/api/stats",
       "stats_api_type": "2miners",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Three-Region Solo Mining",
@@ -893,20 +838,18 @@
       },
       "notes": "Non-custodial direct coinbase payouts with native TLS across nine regions and five SHA-256 coins.",
       "first_added_utc": "2025-01-01T00:00:00Z",
-      "tagline": "Non-Custodial Solo Mining",
-      "description": "SoloFury is a non-custodial solo mining pool built on a ckpool fork. 1% fee with direct coinbase payouts. No registration required.",
+      "tagline": "Nine-Region Solo Infrastructure",
+      "description": "SoloFury is a non-custodial solo mining pool operating nine named regional servers across five continents. Built on a ckpool fork, it supports BTC, BCH, and other SHA-256 coins with 1% fee and direct coinbase payouts. No registration required.",
       "founded": "2026",
       "payout_method": "Direct coinbase (non-custodial).",
-      "geographic_presence": "Multiple regional endpoints available.",
+      "geographic_presence": "Atlanta, Seattle, Frankfurt, London, Tel Aviv, Johannesburg, São Paulo, Singapore, and Tokyo.",
       "software": {
         "stratum": "ckpool fork (open source)",
         "bitcoin": null
       },
       "fees": {
         "Solo": 1
-      },
-      "stats_api": "https://solofury.com/api-btc/pool",
-      "stats_api_type": "solofury"
+      }
     },
     {
       "name": "noderunners",
@@ -950,12 +893,7 @@
       "geographic_presence": "Not publicly disclosed.",
       "fees": {
         "Solo": 0
-      },
-      "stats_api": "https://noderunners.network/en/pool/info",
-      "stats_api_type": "noderunners",
-      "mempool_slugs": [
-        "noderunners"
-      ]
+      }
     },
     {
       "name": "blitzpool",
@@ -968,7 +906,7 @@
         "all",
         "europe"
       ],
-      "payout_type": "Solo / PPLNS",
+      "payout_type": "Solo / PPLNS / Group Solo / Blockparty",
       "fee_pct": 0,
       "website_url": "https://blitzpool.yourdevice.ch/",
       "location": "EU",
@@ -997,10 +935,10 @@
       },
       "fees": {
         "Solo": 0,
-        "PPLNS": 1
-      },
-      "stats_api": "https://blitzpool.yourdevice.ch:3334/api/pool",
-      "stats_api_type": "blitzpool"
+        "PPLNS": 1,
+        "Group Solo": 1.5,
+        "Blockparty": 1.5
+      }
     },
     {
       "name": "helios",
@@ -1039,7 +977,7 @@
       "payout_method": "Direct coinbase (non-custodial). 99% of block reward paid to miner.",
       "geographic_presence": "Montreal, Canada; Sydney, Australia; Gravelines, France.",
       "software": {
-        "stratum": "ckpool (modified)",
+        "stratum": "Modified CKPool",
         "bitcoin": null
       },
       "fees": {
@@ -1057,7 +995,7 @@
         "all",
         "europe"
       ],
-      "payout_type": "Solo / Hybrid",
+      "payout_type": "Solo / Prop+ / Solo Split",
       "fee_pct": 2,
       "website_url": "https://www.solopool.com/",
       "location": "Global",
@@ -1081,13 +1019,10 @@
       "payout_method": "Direct coinbase (non-custodial) across all modes. Multi-output coinbase for Prop+/Split.",
       "geographic_presence": "Los Angeles, New York, Europe, Singapore, Dubai, and São Paulo.",
       "fees": {
-        "All modes": 2
-      },
-      "mempool_slugs": [
-        "solopoolcom"
-      ],
-      "stats_api": "https://solopool.com/test-mainnetapi.php",
-      "stats_api_type": "solopool"
+        "Solo": 2,
+        "Prop+": 2,
+        "Solo Split": 2
+      }
     },
     {
       "name": "ca_solohash",
@@ -1126,9 +1061,7 @@
       "geographic_presence": "Canada.",
       "fees": {
         "Solo": 0.5
-      },
-      "stats_api": "https://api.solohash.co.uk/api/v1/pools",
-      "stats_api_type": "solohash"
+      }
     },
     {
       "name": "uk_solohash",
@@ -1167,9 +1100,7 @@
       "geographic_presence": "United Kingdom.",
       "fees": {
         "Solo": 0.5
-      },
-      "stats_api": "https://api.solohash.co.uk/api/v1/pools",
-      "stats_api_type": "solohash"
+      }
     },
     {
       "name": "de_solohash",
@@ -1208,9 +1139,7 @@
       "geographic_presence": "Germany.",
       "fees": {
         "Solo": 0.5
-      },
-      "stats_api": "https://api.solohash.co.uk/api/v1/pools",
-      "stats_api_type": "solohash"
+      }
     },
     {
       "name": "braiins_solo",
@@ -1252,12 +1181,7 @@
       },
       "fees": {
         "Solo": 0.5
-      },
-      "stats_api": "https://solo.braiins.com/pool.status",
-      "stats_api_type": "ckpool",
-      "mempool_slugs": [
-        "braiinssolo"
-      ]
+      }
     }
   ]
 }

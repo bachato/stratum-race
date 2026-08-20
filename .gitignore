@@ -44,3 +44,6 @@ Thumbs.db
 # Export output
 export/
 .export-push-tmp/
+
+# Local dev mock data (never commit)
+frontend/public/api/

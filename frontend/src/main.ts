@@ -38,6 +38,11 @@ const router = createRouter({
       component: () => import('./views/AboutView.vue'),
     },
     {
+      path: '/pools',
+      name: 'pools',
+      component: () => import('./views/PoolsView.vue'),
+    },
+    {
       path: '/pool/:poolName',
       name: 'pool-detail',
       component: () => import('./views/PoolDetailView.vue'),

@@ -10,6 +10,7 @@ import type {
   PoolTier,
   PoolAggregate,
   TimeFrame,
+  PoolStatsLatest,
 } from '@/types'
 
 /** Map of leaderboard time frames to their pre-computed aggregate file paths */
@@ -71,6 +72,11 @@ export const useRaceStore = defineStore('race', () => {
   /** Vantage display data from runtime.json: { [vantageId]: { label, flag?, location?, order? } } */
   const vantageDisplay = ref<Record<string, { label: string; flag?: string; location?: string; order?: number }>>({})
 
+  /** Latest pool stats snapshot (from pool-stats-latest.json); null until loaded */
+  const poolStatsLatest = ref<PoolStatsLatest | null>(null)
+
+  /** Timestamp of last successful poolStatsLatest fetch (for 5-min TTL) */
+  const poolStatsLatestFetchedAt = ref<number>(0)
   // ─── Getters ──────────────────────────────────────────────────────────────
 
   /**
@@ -488,6 +494,24 @@ export const useRaceStore = defineStore('race', () => {
   }
 
   /**
+   * Fetch pool-stats-latest.json with a 5-minute client-side TTL.
+   * Used by the /pools index page and /pool/:name detail page.
+   * Fails silently — the UI shows "—" for any missing stats.
+   */
+  async function loadPoolStatsLatest() {
+    const FIVE_MIN = 5 * 60 * 1000
+    if (poolStatsLatest.value && Date.now() - poolStatsLatestFetchedAt.value < FIVE_MIN) return
+    try {
+      const response = await fetch('/api/config/pool-stats-latest.json')
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      poolStatsLatest.value = await response.json()
+      poolStatsLatestFetchedAt.value = Date.now()
+    } catch {
+      // No stats available — UI handles gracefully with "—"
+    }
+  }
+
+  /**
    * Toggle template ranking mode between 'full' and 'any'.
    */
   function setTemplateMode(mode: TemplateMode) {
@@ -524,6 +548,7 @@ export const useRaceStore = defineStore('race', () => {
     vantageHealth,
     vantageDisplay,
     poolConfig,
+    poolStatsLatest,
     templateMode,
     selectedTier,
     selectedOperator,
@@ -553,6 +578,7 @@ export const useRaceStore = defineStore('race', () => {
     reloadActiveTimeFrame,
     loadVantageHealth,
     loadPoolConfig,
+    loadPoolStatsLatest,
     setTemplateMode,
     setTier,
     setOperator,

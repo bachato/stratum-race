@@ -1,0 +1,389 @@
+{
+  "generated_utc": "2026-08-16T14:04:56Z",
+  "network_difficulty": 127479855693691.4,
+  "pools": {
+    "atlaspool": {
+      "hashrate_value": 3.7358e+16,
+      "hashrate_formatted": "37.36 PH/s",
+      "active_users": 1171,
+      "active_workers": 2044,
+      "pool_fee": 1.5,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:44Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:44Z"
+    },
+    "ckpool": {
+      "hashrate_value": 1.13e+17,
+      "hashrate_formatted": "113PH/s",
+      "active_users": 23713,
+      "active_workers": 40141,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:45Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:45Z"
+    },
+    "helios": {
+      "hashrate_value": 472000000000000.0,
+      "hashrate_formatted": "472TH/s",
+      "active_users": 813,
+      "active_workers": 1868,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:45Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:45Z"
+    },
+    "braiins_solo": {
+      "hashrate_value": 6.9e+16,
+      "hashrate_formatted": "69PH/s",
+      "active_users": 3063,
+      "active_workers": 3885,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:45Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:45Z"
+    },
+    "2miners_eu": {
+      "hashrate_value": 4706731773529623,
+      "hashrate_formatted": "4.71 PH/s",
+      "active_users": 125,
+      "active_workers": 178,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:46Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:46Z"
+    },
+    "solofury": {
+      "hashrate_value": 442700000000000,
+      "hashrate_formatted": "442.70 TH/s",
+      "active_users": 12,
+      "active_workers": 29,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:48Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:48Z"
+    },
+    "blitzpool": {
+      "hashrate_value": 3784491020552816,
+      "hashrate_formatted": "3.78 PH/s",
+      "active_users": 2461,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:48Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:48Z"
+    },
+    "mineshop": {
+      "hashrate_value": 3010000000000000.0,
+      "hashrate_formatted": "3.01 PH/s",
+      "active_users": 305,
+      "active_workers": 574,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:49Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:49Z"
+    },
+    "uk_solohash": {
+      "hashrate_value": 1827097500000000.0,
+      "hashrate_formatted": "1.83 PH/s",
+      "active_users": 301,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:51Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:51Z"
+    },
+    "ca_solohash": {
+      "hashrate_value": 1827097500000000.0,
+      "hashrate_formatted": "1.83 PH/s",
+      "active_users": 301,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:51Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:51Z"
+    },
+    "de_solohash": {
+      "hashrate_value": 1827097500000000.0,
+      "hashrate_formatted": "1.83 PH/s",
+      "active_users": 301,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:51Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:51Z"
+    },
+    "noderunners": {
+      "hashrate_value": 591000000000000.0,
+      "hashrate_formatted": "591 TH/s",
+      "active_users": 295,
+      "active_workers": 402,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:53Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:53Z"
+    },
+    "public_pool": {
+      "hashrate_value": 5.072922833686493e+16,
+      "hashrate_formatted": "50.73 PH/s",
+      "active_users": null,
+      "active_workers": 24594,
+      "pool_fee": null,
+      "miner_types": [
+        {
+          "device": "bitaxe",
+          "workers": 16419,
+          "hashrate_formatted": "18.04 PH/s",
+          "best_difficulty_formatted": "1.11 T"
+        },
+        {
+          "device": "NerdQAxe++",
+          "workers": 1882,
+          "hashrate_formatted": "9.61 PH/s",
+          "best_difficulty_formatted": "377.14 G"
+        },
+        {
+          "device": "cgminer",
+          "workers": 726,
+          "hashrate_formatted": "6.86 PH/s",
+          "best_difficulty_formatted": "90.89 G"
+        },
+        {
+          "device": "Antminer",
+          "workers": 54,
+          "hashrate_formatted": "4.53 PH/s",
+          "best_difficulty_formatted": "2.21 T"
+        },
+        {
+          "device": "NerdOCTAXE",
+          "workers": 274,
+          "hashrate_formatted": "3.00 PH/s",
+          "best_difficulty_formatted": "443.70 G"
+        },
+        {
+          "device": "Braiins",
+          "workers": 7,
+          "hashrate_formatted": "1.58 PH/s",
+          "best_difficulty_formatted": "2.14 G"
+        },
+        {
+          "device": "2026",
+          "workers": 44,
+          "hashrate_formatted": "1.50 PH/s",
+          "best_difficulty_formatted": "16.44 G"
+        },
+        {
+          "device": "LuckyMiner",
+          "workers": 713,
+          "hashrate_formatted": "930.21 TH/s",
+          "best_difficulty_formatted": "333.21 G"
+        },
+        {
+          "device": "xminer",
+          "workers": 7,
+          "hashrate_formatted": "729.32 TH/s",
+          "best_difficulty_formatted": "22.11 G"
+        },
+        {
+          "device": "NerdQAxe+",
+          "workers": 211,
+          "hashrate_formatted": "532.41 TH/s",
+          "best_difficulty_formatted": "149.89 G"
+        }
+      ],
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:53Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:53Z"
+    },
+    "solomining_de": {
+      "hashrate_value": 8414596456774251.0,
+      "hashrate_formatted": "8.41 PH/s",
+      "active_users": null,
+      "active_workers": 4075,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:53Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:53Z"
+    },
+    "bitcoinmerch": {
+      "hashrate_value": 2316392966320861.5,
+      "hashrate_formatted": "2.32 PH/s",
+      "active_users": null,
+      "active_workers": 1983,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:53Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:53Z"
+    },
+    "pyblock": {
+      "hashrate_value": 24300000000000.0,
+      "hashrate_formatted": "24.30 TH/s",
+      "active_users": null,
+      "active_workers": 57,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": true,
+      "fetched_utc": "2026-08-16T14:04:54Z",
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:54Z"
+    },
+    "ocean": {
+      "hashrate_value": null,
+      "hashrate_formatted": null,
+      "active_users": null,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": false,
+      "fetch_error": "no_api_configured",
+      "fetched_utc": null,
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:56Z"
+    },
+    "antpool": {
+      "hashrate_value": null,
+      "hashrate_formatted": null,
+      "active_users": null,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": false,
+      "fetch_error": "no_api_configured",
+      "fetched_utc": null,
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:56Z"
+    },
+    "f2pool": {
+      "hashrate_value": null,
+      "hashrate_formatted": null,
+      "active_users": null,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": false,
+      "fetch_error": "no_api_configured",
+      "fetched_utc": null,
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:56Z"
+    },
+    "viabtc": {
+      "hashrate_value": null,
+      "hashrate_formatted": null,
+      "active_users": null,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": false,
+      "fetch_error": "no_api_configured",
+      "fetched_utc": null,
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:56Z"
+    },
+    "spiderpool": {
+      "hashrate_value": null,
+      "hashrate_formatted": null,
+      "active_users": null,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": false,
+      "fetch_error": "no_api_configured",
+      "fetched_utc": null,
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:56Z"
+    },
+    "secpool": {
+      "hashrate_value": null,
+      "hashrate_formatted": null,
+      "active_users": null,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": false,
+      "fetch_error": "no_api_configured",
+      "fetched_utc": null,
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:56Z"
+    },
+    "binance_pool": {
+      "hashrate_value": null,
+      "hashrate_formatted": null,
+      "active_users": null,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": false,
+      "fetch_error": "no_api_configured",
+      "fetched_utc": null,
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:56Z"
+    },
+    "braiins_pool": {
+      "hashrate_value": null,
+      "hashrate_formatted": null,
+      "active_users": null,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": false,
+      "fetch_error": "no_api_configured",
+      "fetched_utc": null,
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:56Z"
+    },
+    "parasite": {
+      "hashrate_value": null,
+      "hashrate_formatted": null,
+      "active_users": null,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": false,
+      "fetch_error": "no_api_configured",
+      "fetched_utc": null,
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:56Z"
+    },
+    "letsmineit": {
+      "hashrate_value": null,
+      "hashrate_formatted": null,
+      "active_users": null,
+      "active_workers": null,
+      "pool_fee": null,
+      "miner_types": null,
+      "fetch_ok": false,
+      "fetch_error": "no_api_configured",
+      "fetched_utc": null,
+      "validation_status": "verified",
+      "last_verified_utc": "2026-08-16T14:04:56Z"
+    }
+  }
+}

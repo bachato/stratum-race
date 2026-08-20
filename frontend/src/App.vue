@@ -53,6 +53,8 @@ const lastBlockHeight = computed((): number | null => {
   if (store.recentBlocks.length === 0) return null
   return store.recentBlocks[0].height
 })
+
+const currentYear = new Date().getFullYear()
 </script>
 
 <template>
@@ -88,6 +90,7 @@ const lastBlockHeight = computed((): number | null => {
       <nav class="app-nav" :class="{ 'nav-open': mobileNavOpen }">
         <router-link to="/" @click="closeMobileNav">Leaderboard</router-link>
         <router-link to="/blocks" @click="closeMobileNav">Recent Blocks</router-link>
+        <router-link to="/pools" @click="closeMobileNav">Pools</router-link>
         <router-link to="/history" @click="closeMobileNav">History</router-link>
         <router-link v-if="vantageCount >= 2" to="/compare" @click="closeMobileNav">Compare</router-link>
         <router-link to="/about" @click="closeMobileNav">About</router-link>
@@ -106,6 +109,9 @@ const lastBlockHeight = computed((): number | null => {
     <main class="app-main">
       <RouterView />
     </main>
+    <footer class="app-footer">
+      <p>© {{ currentYear }} StratumRace</p>
+    </footer>
     <NotificationToast />
   </div>
 </template>
@@ -315,4 +321,14 @@ const lastBlockHeight = computed((): number | null => {
     max-width: 1800px;
   }
 }
+
+.app-footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+.app-footer p { margin: 0; }
 </style>
