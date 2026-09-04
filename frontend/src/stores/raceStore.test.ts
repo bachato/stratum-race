@@ -250,9 +250,25 @@ describe('raceStore — review fixes', () => {
 
       expect(ok).toBe(true)
       expect(store.activeTimeFrame).toBe('last10')
-      expect(fetchSpy).toHaveBeenCalledWith('/api/aggregates/recent-10.json')
+      expect(fetchSpy).toHaveBeenCalledWith('/api/aggregates/recent-10.json', {
+        cache: 'no-cache',
+      })
       expect(store.leaderboardFromRecent).toBe(false)
       expect(store.aggregateLastUpdated).toBe('2026-07-16T12:00:00Z')
+    })
+
+    it("requests with cache: 'no-cache' so a stale browser copy cannot be served", async () => {
+      // The aggregate objects carry no Cache-Control from S3/CloudFront, so a
+      // default fetch can be answered from the browser's disk cache under
+      // heuristic freshness and never reach the network — which would silently
+      // defeat every refresh trigger. Revalidation is cheap (304, no body).
+      const store = useRaceStore()
+      const fetchSpy = mockAggregateFetch(true)
+
+      await store.loadTimeFrame('7d')
+
+      const init = fetchSpy.mock.calls[0][1] as RequestInit
+      expect(init?.cache).toBe('no-cache')
     })
 
     it('reverts the selection when the fetch fails', async () => {
@@ -291,7 +307,9 @@ describe('raceStore — review fixes', () => {
       fetchSpy.mockClear()
 
       await store.reloadActiveTimeFrame()
-      expect(fetchSpy).toHaveBeenCalledWith('/api/aggregates/recent-10.json')
+      expect(fetchSpy).toHaveBeenCalledWith('/api/aggregates/recent-10.json', {
+        cache: 'no-cache',
+      })
       expect(store.activeTimeFrame).toBe('last10')
     })
   })

@@ -426,7 +426,16 @@ export const useRaceStore = defineStore('race', () => {
   async function loadAggregate(dateRange: string): Promise<boolean> {
     isLoading.value = true
     try {
-      const response = await fetch(`/api/aggregates/${dateRange}.json`)
+      // cache: 'no-cache' forces revalidation instead of trusting heuristic
+      // freshness. The aggregate objects carry no Cache-Control from S3/
+      // CloudFront, so a default fetch can be served from the browser's disk
+      // cache and never reach the network — which would silently defeat every
+      // refresh trigger below. Revalidation is cheap: CloudFront answers with
+      // 304 (zero body) unless the aggregate was actually rewritten, and it
+      // serves from its own edge cache rather than hitting S3.
+      const response = await fetch(`/api/aggregates/${dateRange}.json`, {
+        cache: 'no-cache',
+      })
       if (!response.ok) throw new Error(`HTTP ${response.status}`)
       const data = await response.json()
       leaderboardData.value = data.pools ?? {}

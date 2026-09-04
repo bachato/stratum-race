@@ -37,6 +37,22 @@ async def aggregator_loop(
         pass  # Normal — startup delay elapsed, proceed
 
     while not stop.is_set():
+        # Clear the trigger BEFORE the cycle, not after.
+        #
+        # A race written at any point from here on re-sets the trigger and is
+        # guaranteed a wakeup. Clearing after the cycle instead discarded any
+        # race that landed during it: run_all_aggregations may not have seen the
+        # new file, and poll_pool_stats below makes ~18 upstream HTTP calls and
+        # can run for tens of seconds, so a race arriving in that window lost
+        # its wakeup and waited out the full CYCLE_INTERVAL_S.
+        #
+        # The cost of clearing early is at most one redundant cycle (a race that
+        # lands mid-aggregation and was already picked up), which is cheap and
+        # always correct. The cost of clearing late was up to 5 minutes of
+        # staleness in the exact case this trigger exists to handle.
+        if trigger is not None:
+            trigger.clear()
+
         try:
             now = datetime.now(timezone.utc)
             logger.info("Aggregation cycle starting at %s", now.strftime("%H:%M:%S"))
@@ -50,10 +66,6 @@ async def aggregator_loop(
             await poll_pool_stats(storage)
         except Exception:
             logger.exception("Pool stats polling failed — will retry next cycle")
-
-        # Clear the trigger so we can detect new races during the wait
-        if trigger is not None:
-            trigger.clear()
 
         # Wait for either: stop signal, trigger (new race), or 5-min timeout
         try:

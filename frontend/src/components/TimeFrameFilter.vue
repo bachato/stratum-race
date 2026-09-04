@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useRaceStore } from '@/stores/raceStore'
 import type { TimeFrame } from '@/types'
@@ -11,11 +11,38 @@ import type { TimeFrame } from '@/types'
 const store = useRaceStore()
 const { activeTimeFrame, isLoading, aggregateLastUpdated } = storeToRefs(store)
 
+/**
+ * Current time, advanced on an interval.
+ *
+ * `updatedText` below reads this instead of calling Date.now() directly.
+ * Date.now() is not reactive, so a computed that only referenced it and
+ * `aggregateLastUpdated` was evaluated once when the aggregate loaded and then
+ * cached forever — the label sat at "Updated <1 min ago" indefinitely while the
+ * data aged. That made a stale leaderboard look fresh, which is precisely the
+ * failure this label exists to surface.
+ */
+const LABEL_TICK_MS = 30_000
+const now = ref(Date.now())
+let tickTimer: ReturnType<typeof setInterval> | null = null
+
+onMounted(() => {
+  tickTimer = setInterval(() => {
+    now.value = Date.now()
+  }, LABEL_TICK_MS)
+})
+
+onUnmounted(() => {
+  if (tickTimer !== null) {
+    clearInterval(tickTimer)
+    tickTimer = null
+  }
+})
+
 /** Human-readable "updated X min ago" text */
 const updatedText = computed((): string | null => {
   if (!aggregateLastUpdated.value) return null
   const then = new Date(aggregateLastUpdated.value).getTime()
-  const seconds = Math.floor((Date.now() - then) / 1000)
+  const seconds = Math.floor((now.value - then) / 1000)
   if (seconds < 60) return 'Updated <1 min ago'
   const minutes = Math.floor(seconds / 60)
   if (minutes < 60) return `Updated ${minutes} min ago`

@@ -232,3 +232,77 @@ class TestAggregatorLoop:
         # Task should have completed without error
         assert task.done()
         assert task.exception() is None
+
+
+class TestAggregationTriggerWakeup:
+    """The trigger must be cleared BEFORE a cycle, never after.
+
+    standalone/aggregator.py waits on an asyncio.Event that server.make_race_sink
+    sets after each race write. Clearing that event after the cycle discarded any
+    race that arrived during it — and poll_pool_stats makes ~18 upstream HTTP
+    calls, so that window is tens of seconds wide. The dropped wakeup meant the
+    race waited out the full CYCLE_INTERVAL_S (5 minutes), which is exactly the
+    staleness the trigger exists to prevent.
+    """
+
+    @pytest.mark.asyncio
+    async def test_race_arriving_during_a_cycle_still_wakes_the_loop(self, storage):
+        """A trigger set mid-cycle must survive and start the next cycle."""
+        stop = asyncio.Event()
+        trigger = asyncio.Event()
+        cycles = []
+
+        def slow_run(*args, **kwargs):
+            cycles.append(time.monotonic())
+            # Simulate a race landing while this cycle is in flight (the sink
+            # calls trigger.set() from the same event loop).
+            if len(cycles) == 1:
+                trigger.set()
+
+        with patch("standalone.aggregator.run_all_aggregations", side_effect=slow_run), \
+             patch("standalone.aggregator.poll_pool_stats", new=_noop_poll), \
+             patch("standalone.aggregator.STARTUP_DELAY_S", 0.01), \
+             patch("standalone.aggregator.CYCLE_INTERVAL_S", 30):
+            task = asyncio.create_task(aggregator_loop(storage, stop, trigger))
+            # Far shorter than CYCLE_INTERVAL_S: a second cycle in this window
+            # can only come from the trigger, not the timeout.
+            await asyncio.sleep(0.3)
+            stop.set()
+            trigger.set()  # unblock the wait so the task can exit
+            await asyncio.wait_for(task, timeout=2.0)
+
+        assert len(cycles) >= 2, (
+            "trigger set during the first cycle was swallowed; the loop waited "
+            "for the interval instead of starting a new cycle"
+        )
+
+    @pytest.mark.asyncio
+    async def test_loop_waits_when_no_race_arrives(self, storage):
+        """Without a trigger the loop must NOT spin — it waits for the interval.
+
+        Guards the other direction of the fix: clearing the trigger early must
+        not turn the loop into a busy cycle.
+        """
+        stop = asyncio.Event()
+        trigger = asyncio.Event()
+        cycles = []
+
+        def count_run(*args, **kwargs):
+            cycles.append(time.monotonic())
+
+        with patch("standalone.aggregator.run_all_aggregations", side_effect=count_run), \
+             patch("standalone.aggregator.poll_pool_stats", new=_noop_poll), \
+             patch("standalone.aggregator.STARTUP_DELAY_S", 0.01), \
+             patch("standalone.aggregator.CYCLE_INTERVAL_S", 30):
+            task = asyncio.create_task(aggregator_loop(storage, stop, trigger))
+            await asyncio.sleep(0.3)
+            stop.set()
+            trigger.set()
+            await asyncio.wait_for(task, timeout=2.0)
+
+        assert len(cycles) == 1, f"expected a single cycle, got {len(cycles)}"
+
+
+async def _noop_poll(storage):
+    """Stand-in for poll_pool_stats (no upstream HTTP in tests)."""
+    return None

@@ -59,6 +59,7 @@ app.mount('#app')
 // Initialize data loading after app is mounted
 import { useRaceStore } from './stores/raceStore'
 import { useWebSocket } from './services/WebSocketManager'
+import { startAggregateAutoRefresh } from './services/AggregateRefresh'
 
 const store = useRaceStore()
 const { connect, onRaceResult, onNewBlock } = useWebSocket()
@@ -75,6 +76,13 @@ store.loadVantageHealth()
 
 // Load the default time frame (7d) aggregate for the full leaderboard
 store.loadTimeFrame('7d')
+
+// Keep the leaderboard tracking the server's aggregate while the tab stays
+// open. Without this the leaderboard freezes on whichever window was current
+// at page load while Recent Blocks keeps advancing, so the two views end up
+// describing different sets of races. See services/AggregateRefresh.ts.
+startAggregateAutoRefresh(() => store.reloadActiveTimeFrame())
+
 onRaceResult((race) => {
   store.addRaceResult(race)
 })
