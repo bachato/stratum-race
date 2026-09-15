@@ -91,8 +91,8 @@ def parse_blitzpool(data: dict) -> dict:
     return {
         "hashrate_value": hr,
         "hashrate_formatted": format_hashrate(hr),
-        "active_users": data.get("totalMiners"),
-        "active_workers": None,
+        "active_users": None,
+        "active_workers": data.get("totalMiners"),
         "pool_fee": data.get("fee"),
         "miner_types": None,
     }

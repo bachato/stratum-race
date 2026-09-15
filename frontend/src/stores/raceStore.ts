@@ -29,7 +29,7 @@ export const TIME_FRAME_PATHS: Record<TimeFrame, string> = {
 export const useRaceStore = defineStore('race', () => {
   // ─── State ────────────────────────────────────────────────────────────────
 
-  /** Last 40 races (from recent-blocks.json + WebSocket updates) */
+  /** Last 250 races (from recent-blocks.json + WebSocket updates) */
   const recentBlocks = ref<RecentBlock[]>([])
 
   /** Current pool stats keyed by pool name (from latest aggregate) */
@@ -259,8 +259,8 @@ export const useRaceStore = defineStore('race', () => {
       return !(b.height == null && b.vantage === recentBlock.vantage && b.epoch === recentBlock.epoch)
     })
 
-    // Prepend and cap at 40
-    recentBlocks.value = [recentBlock, ...filtered].slice(0, 40)
+    // Prepend and cap at 250
+    recentBlocks.value = [recentBlock, ...filtered].slice(0, 250)
 
     // Update last block epoch
     lastBlockEpoch.value = race.first_epoch
@@ -314,7 +314,7 @@ export const useRaceStore = defineStore('race', () => {
       // Sort by epoch descending (newest first) to ensure correct ordering
       deduped.sort((a, b) => b.epoch - a.epoch)
 
-      recentBlocks.value = deduped.slice(0, 40)
+      recentBlocks.value = deduped.slice(0, 250)
 
       // Update lastBlockEpoch from most recent block (guaranteed newest after sort)
       if (recentBlocks.value.length > 0) {

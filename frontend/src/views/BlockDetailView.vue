@@ -31,37 +31,68 @@ const isLoading = ref(false)
 const loadError = ref(false)
 
 /**
+ * Build candidate S3 URLs for a block height we have no store entry for.
+ * Tries the last 4 days × all known vantages, since we don't know the exact
+ * date or which vantages observed it.
+ */
+function candidateUrls(height: number): string[] {
+  const vantages = Object.keys(store.vantageDisplay)
+  if (vantages.length === 0) return []
+
+  const urls: string[] = []
+  const now = new Date()
+  for (let daysAgo = 0; daysAgo <= 3; daysAgo++) {
+    const d = new Date(now.getTime() - daysAgo * 86400000)
+    const year = d.getUTCFullYear()
+    const month = String(d.getUTCMonth() + 1).padStart(2, '0')
+    const day = String(d.getUTCDate()).padStart(2, '0')
+    for (const vantage of vantages) {
+      urls.push(`/api/races/${year}/${month}/${day}/${height}-${vantage}.json`)
+    }
+  }
+  return urls
+}
+
+/**
  * Fetch full race JSON files for the given block.
- * Uses the RecentBlock summary to construct the API path.
+ * When the block is in the store, uses the stored epoch+vantage to build exact
+ * paths. When it has aged out of the store, probes candidate paths across the
+ * last 4 days and all known vantages.
  */
 async function fetchFullRaces() {
-  if (recentMatches.value.length === 0) return
   isLoading.value = true
   loadError.value = false
   fullRaces.value = []
 
   const results: RaceResult[] = []
 
-  for (const block of recentMatches.value) {
-    // Build the /api/races/... path for the race file
-    const dt = new Date(block.epoch * 1000)
-    const year = dt.getUTCFullYear()
-    const month = String(dt.getUTCMonth() + 1).padStart(2, '0')
-    const day = String(dt.getUTCDate()).padStart(2, '0')
-    // Null-height races are stored as unknown-<epoch>-<vantage>.json
-    // (epoch disambiguates multiple unknown blocks on the same day)
-    const heightPart = block.height != null ? String(block.height) : `unknown-${Math.floor(block.epoch)}`
-    const vantage = block.vantage
-    const url = `/api/races/${year}/${month}/${day}/${heightPart}-${vantage}.json`
-
-    try {
-      const response = await fetch(url)
-      if (response.ok) {
-        const data: RaceResult = await response.json()
-        results.push(data)
-      }
-    } catch {
-      // Silently skip — will show summary fallback
+  if (recentMatches.value.length > 0) {
+    // Fast path: exact paths from store entries
+    for (const block of recentMatches.value) {
+      const dt = new Date(block.epoch * 1000)
+      const year = dt.getUTCFullYear()
+      const month = String(dt.getUTCMonth() + 1).padStart(2, '0')
+      const day = String(dt.getUTCDate()).padStart(2, '0')
+      const heightPart = block.height != null ? String(block.height) : `unknown-${Math.floor(block.epoch)}`
+      const url = `/api/races/${year}/${month}/${day}/${heightPart}-${block.vantage}.json`
+      try {
+        const response = await fetch(url)
+        if (response.ok) results.push(await response.json())
+      } catch { /* skip */ }
+    }
+  } else {
+    // Fallback: block aged out of store — probe candidate paths in parallel
+    const urls = candidateUrls(blockHeight.value)
+    const fetches = urls.map(async (url) => {
+      try {
+        const response = await fetch(url)
+        if (response.ok) return await response.json() as RaceResult
+      } catch { /* skip */ }
+      return null
+    })
+    const settled = await Promise.all(fetches)
+    for (const r of settled) {
+      if (r != null) results.push(r)
     }
   }
 
@@ -75,6 +106,15 @@ async function fetchFullRaces() {
 // Fetch full race data when the component mounts or block height changes
 onMounted(fetchFullRaces)
 watch(blockHeight, fetchFullRaces)
+// Also retry when vantageDisplay loads (needed for the fallback probe path)
+watch(
+  () => Object.keys(store.vantageDisplay).length,
+  (count) => {
+    if (count > 0 && fullRaces.value.length === 0 && !isLoading.value) {
+      fetchFullRaces()
+    }
+  },
+)
 // Also retry when recentMatches becomes populated (handles deep-link race condition)
 watch(recentMatches, (newVal) => {
   if (newVal.length > 0 && fullRaces.value.length === 0 && !isLoading.value) {
@@ -274,9 +314,9 @@ function markerPosition(offset: number): string {
       <p>Loading race data...</p>
     </div>
     <div v-else-if="!primaryRace && recentMatches.length === 0" class="not-found">
-      <h2>Block Not in Recent Data</h2>
-      <p>Block {{ blockHeight.toLocaleString() }} is not available in the recent blocks list.</p>
-      <button @click="goBack">Return to Leaderboard</button>
+      <h2>Block Not Available</h2>
+      <p>Race data for block {{ blockHeight.toLocaleString() }} could not be found. It may be older than the retention window.</p>
+      <button @click="goBack">Return to Recent Blocks</button>
     </div>
 
     <!-- Block detail content -->

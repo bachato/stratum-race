@@ -1559,7 +1559,16 @@ async def pool_worker(
             pool.subscribe_error = None
             _print(name, "connected")
 
-            send_json(writer, {"id": 1, "method": "mining.subscribe", "params": []})
+            # Send the user agent as the sole subscribe param. Params are
+            # ("user agent/version", extranonce1) and both are optional in the
+            # de-facto spec, so most pools accept an empty list — but some
+            # stratum implementations validate the arity strictly and reject it
+            # (pogolo: "invalid parameter length; must be 1 or 2" -> 422, which
+            # surfaced here as "subscribe rejected by pool"). A one-element list
+            # is accepted everywhere and also self-identifies us in pool logs.
+            # The result (extranonce1/extranonce2_size) is still ignored: this
+            # client never submits shares.
+            send_json(writer, {"id": 1, "method": "mining.subscribe", "params": [CLIENT_VERSION]})
             send_json(writer, {"id": 2, "method": "mining.authorize", "params": [user, "x"]})
             await writer.drain()
 

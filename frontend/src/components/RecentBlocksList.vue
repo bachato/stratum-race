@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useRaceStore } from '@/stores/raceStore'
 import { useTimezone } from '@/composables/useTimezone'
@@ -12,6 +12,9 @@ const props = withDefaults(defineProps<{
   poolTypeFilter: 'all',
 })
 
+const PAGE_SIZE = 10
+const currentPage = ref(0)
+
 const router = useRouter()
 const store = useRaceStore()
 const { formatTimestamp } = useTimezone()
@@ -23,7 +26,7 @@ const { formatVantage, getFlag } = useVantageNames()
  * When Solo filter is active, shows the fastest solo pool as winner/runner-up
  * (never hides blocks entirely).
  */
-const rows = computed(() => {
+const allRows = computed(() => {
   let blocks = store.recentBlocks
 
   // Filter by vantage point if one is selected
@@ -71,6 +74,27 @@ const rows = computed(() => {
     }
   })
 })
+
+const totalPages = computed(() => Math.max(1, Math.ceil(allRows.value.length / PAGE_SIZE)))
+
+const rows = computed(() => {
+  const start = currentPage.value * PAGE_SIZE
+  return allRows.value.slice(start, start + PAGE_SIZE)
+})
+
+// Reset to first page when filter or vantage changes
+watch(
+  () => [props.poolTypeFilter, store.selectedVantage],
+  () => { currentPage.value = 0 },
+)
+
+function prevPage() {
+  if (currentPage.value > 0) currentPage.value--
+}
+
+function nextPage() {
+  if (currentPage.value < totalPages.value - 1) currentPage.value++
+}
 
 function navigateToBlock(height: number) {
   router.push({ name: 'block-detail', params: { height: String(height) } })
@@ -142,6 +166,21 @@ function navigateToBlock(height: number) {
           </tr>
         </tbody>
       </table>
+    </div>
+    <div v-if="totalPages > 1" class="pagination">
+      <button
+        class="page-btn"
+        :disabled="currentPage === 0"
+        @click="prevPage"
+        aria-label="Previous page"
+      >← Prev</button>
+      <span class="page-info">{{ currentPage + 1 }} / {{ totalPages }}</span>
+      <button
+        class="page-btn"
+        :disabled="currentPage >= totalPages - 1"
+        @click="nextPage"
+        aria-label="Next page"
+      >Next →</button>
     </div>
   </section>
 </template>
@@ -235,6 +274,45 @@ function navigateToBlock(height: number) {
   color: var(--text-secondary);
   font-family: var(--font-sans);
   font-style: italic;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.page-btn {
+  padding: 0.375rem 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: 0.375rem;
+  background: var(--surface-elevated);
+  color: var(--text-primary);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.page-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  min-width: 50px;
+  text-align: center;
 }
 
 /* Mobile responsive: hide less important columns, allow horizontal scroll for the rest */
