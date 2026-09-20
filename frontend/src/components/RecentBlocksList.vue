@@ -75,11 +75,27 @@ const allRows = computed(() => {
   })
 })
 
-const totalPages = computed(() => Math.max(1, Math.ceil(allRows.value.length / PAGE_SIZE)))
+const totalPages = computed(() => {
+  // Page by unique block heights (a block with 4 vantages is still 1 block)
+  const uniqueHeights = new Set(allRows.value.map(r => r.block_height ?? `u${r.first_epoch}`))
+  return Math.max(1, Math.ceil(uniqueHeights.size / PAGE_SIZE))
+})
 
 const rows = computed(() => {
-  const start = currentPage.value * PAGE_SIZE
-  return allRows.value.slice(start, start + PAGE_SIZE)
+  // Collect unique heights in order (allRows is already sorted newest-first)
+  const seen = new Set<string | number>()
+  const orderedHeights: (number | string)[] = []
+  for (const r of allRows.value) {
+    const key = r.block_height ?? `u${r.first_epoch}`
+    if (!seen.has(key)) {
+      seen.add(key)
+      orderedHeights.push(key)
+    }
+  }
+  // Slice to the current page's heights
+  const pageHeights = new Set(orderedHeights.slice(currentPage.value * PAGE_SIZE, (currentPage.value + 1) * PAGE_SIZE))
+  // Return all rows whose height is in this page's set (preserves vantage rows)
+  return allRows.value.filter(r => pageHeights.has(r.block_height ?? `u${r.first_epoch}`))
 })
 
 // Reset to first page when filter or vantage changes

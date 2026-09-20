@@ -253,6 +253,23 @@ def parse_spiderpool(data: dict) -> dict:
         "pool_fee": None,
         "miner_types": None,
     }
+def parse_helios(data: dict) -> dict:
+    btc = data.get("btc", {})
+    hr = btc.get("hashrate_5m", 0)
+    fee_str = btc.get("fee")
+    try:
+        fee = float(fee_str) if fee_str is not None else None
+    except (ValueError, TypeError):
+        fee = None
+    return {
+        "hashrate_value": hr,
+        "hashrate_formatted": format_hashrate(hr),
+        "active_users": btc.get("users"),
+        "active_workers": btc.get("workers"),
+        "pool_fee": fee,
+        "miner_types": None,
+    }
+
 PARSERS = {
     "atlaspool": lambda raw: parse_atlaspool(json.loads(raw)),
     "ckpool": parse_ckpool,  # takes raw string (multi-line)
@@ -269,6 +286,7 @@ PARSERS = {
     "parasite": lambda raw: parse_parasite(json.loads(raw)),
     "antpool": lambda raw: parse_antpool(json.loads(raw)),
     "spiderpool": lambda raw: parse_spiderpool(json.loads(raw)),
+    "helios": lambda raw: parse_helios(json.loads(raw)),
 }
 def fetch_pool_stats(url: str, api_type: str) -> dict:
 

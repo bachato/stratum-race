@@ -33,7 +33,7 @@
       "notes_url": "https://ocean.xyz/docs",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Non-Custodial TIDES Mining",
-      "description": "OCEAN launched in late 2023 with a focus on miner sovereignty. Miners receive payouts directly in the block's coinbase transaction — no account, no custody. Through the DATUM protocol, miners can build their own block templates and choose which transactions to include. The pool uses Bitcoin Knots and supports BOLT12 Lightning payouts for sub-threshold balances.",
+      "description": "OCEAN launched in late 2023 with a focus on miner sovereignty. Miners receive payouts directly in the block's coinbase transaction \u2014 no account, no custody. Through the DATUM protocol, miners can build their own block templates and choose which transactions to include. The pool uses Bitcoin Knots and supports BOLT12 Lightning payouts for sub-threshold balances.",
       "founded": "2023",
       "payout_method": "Direct coinbase (non-custodial). Lightning available via BOLT12 for amounts below the 0.01 BTC on-chain threshold.",
       "geographic_presence": "Not publicly disclosed.",
@@ -294,7 +294,7 @@
       "tagline": "Exchange-Integrated Mining",
       "description": "Binance Pool is the mining service operated by Binance. Earnings are credited directly to the miner's Binance Funding Wallet. Public documentation on connection details, fees, and infrastructure is limited.",
       "founded": "2020",
-      "payout_method": "Custodial — earnings credited to Binance account balance.",
+      "payout_method": "Custodial \u2014 earnings credited to Binance account balance.",
       "geographic_presence": "Not publicly disclosed.",
       "fees": null,
       "mempool_slugs": [
@@ -373,7 +373,7 @@
       "stats_api_type": "ckpool",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "The OG Solo Pool",
-      "description": "CKPool is the trust anchor of Bitcoin solo mining. Operational since 2014, its open-source ckpool/libckpool software powers the majority of solo pools in the ecosystem — including AtlasPool, Parasite, Braiins Solo, and many others listed on this site. The pool requires no registration; miners connect with their Bitcoin address and receive the full block reward (minus 2% fee) directly in the coinbase transaction.",
+      "description": "CKPool is the trust anchor of Bitcoin solo mining. Operational since 2014, its open-source ckpool/libckpool software powers the majority of solo pools in the ecosystem \u2014 including AtlasPool, Parasite, Braiins Solo, and many others listed on this site. The pool requires no registration; miners connect with their Bitcoin address and receive the full block reward (minus 2% fee) directly in the coinbase transaction.",
       "founded": "2014",
       "payout_method": "Direct coinbase (non-custodial). The miner's address is placed directly in the block's coinbase transaction. No account, no withdrawal, no custody.",
       "geographic_presence": "Servers in US-East, US-West, Germany, Singapore, and Australia. Connecting to stratum.ckpool.org automatically routes to the nearest server.",
@@ -424,7 +424,7 @@
       "description": "AtlasPool is a high-performance solo mining pool built on ckpool with a serious infrastructure focus. It operates 100+ anycast edge nodes globally that terminate at 9 dedicated stratum backend servers across six continents. Miners connect to a single hostname and BGP anycast routes them to the lowest-latency endpoint automatically.",
       "founded": "2025",
       "payout_method": "Direct coinbase (non-custodial). 98.5% of block reward paid directly to the miner's wallet address.",
-      "geographic_presence": "Global anycast with stratum backends in Ashburn VA (US), Portland OR (US), São Paulo (BR), Frankfurt (DE), London (UK), Hong Kong (HK), Mumbai (IN), Sydney (AU), and Cape Town (ZA).",
+      "geographic_presence": "Global anycast with stratum backends in Ashburn VA (US), Portland OR (US), S\u00e3o Paulo (BR), Frankfurt (DE), London (UK), Hong Kong (HK), Mumbai (IN), Sydney (AU), and Cape Town (ZA).",
       "software": {
         "stratum": "ckpool (modified)",
         "bitcoin": "Bitcoin Knots (modified)"
@@ -464,7 +464,7 @@
       "notes": "Fully open source with Stratum V1 TLS, Stratum V2, DATUM, and separate solo and shared-payout endpoints.",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Fully Open-Source Zero-Fee Mining",
-      "description": "Public Pool is a fully open-source, zero-fee Bitcoin mining pool offering both Solo and PPLNS modes. It supports Stratum V1, TLS, Stratum V2, and DATUM connections — all without requiring an account. The pool provides detailed per-device-type statistics showing hashrate and worker counts broken down by miner hardware.",
+      "description": "Public Pool is a fully open-source, zero-fee Bitcoin mining pool offering both Solo and PPLNS modes. It supports Stratum V1, TLS, Stratum V2, and DATUM connections \u2014 all without requiring an account. The pool provides detailed per-device-type statistics showing hashrate and worker counts broken down by miner hardware.",
       "founded": "2023",
       "payout_method": "Direct coinbase (non-custodial) for Solo mode. Proportional for PPLNS.",
       "geographic_presence": "Single hosted instance. Location not publicly disclosed.",
@@ -515,7 +515,7 @@
       "tagline": "Hybrid Finder-Bonus Mining",
       "description": "Parasite Pool is a community-driven mining pool with a strong Ordinals following. It uses a unique hybrid payout model where the block finder receives 1 BTC directly in the coinbase and the remainder is distributed proportionally. The pool offers custom prizes including ordinals and mining hardware for miners who submit high-difficulty shares.",
       "founded": "2025",
-      "payout_method": "Hybrid — 1 BTC direct coinbase to the block finder. Remainder distributed proportionally via Lightning or on-chain BTC to the address used as the stratum username.",
+      "payout_method": "Hybrid \u2014 1 BTC direct coinbase to the block finder. Remainder distributed proportionally via Lightning or on-chain BTC to the address used as the stratum username.",
       "geographic_presence": "Global with nodes in Ashburn (US), Frankfurt (DE), and others.",
       "fees": {
         "Hybrid": 0
@@ -560,7 +560,7 @@
       "notes": "Registration-free solo pool that also provides a DATUM gateway for mining OCEAN templates.",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Sovereign Anti-Spam Mining",
-      "description": "PyBLOCK is a non-custodial mining service focused on sovereignty and anti-spam block template policy. It offers Lotto (solo), DATUM TIDES, native Stratum V2, CHIRP, and Carousel modes — all with BIP-110 signaling variants available. The pool runs Bitcoin Knots.",
+      "description": "PyBLOCK is a non-custodial mining service focused on sovereignty and anti-spam block template policy. It offers Lotto (solo), DATUM TIDES, native Stratum V2, CHIRP, and Carousel modes \u2014 all with BIP-110 signaling variants available. The pool runs Bitcoin Knots.",
       "founded": null,
       "payout_method": "Direct coinbase for Lotto/SV2/CHIRP modes. OCEAN TIDES for DATUM mode.",
       "geographic_presence": "South America (primary) and US-East (Ashburn, VA).",
@@ -648,7 +648,7 @@
       "notes_url": "https://solo.mineshop.eu/",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Nuremberg Zero-Fee Solo Pool",
-      "description": "MineShop operates a registration-free, zero-fee Bitcoin solo pool from Nuremberg, Germany. It runs Bitcoin Core v29.3 and offers a Mining Chest store-points loyalty program (100 points = €1, redeemable for up to 20% off miners).",
+      "description": "MineShop operates a registration-free, zero-fee Bitcoin solo pool from Nuremberg, Germany. It runs Bitcoin Core v29.3 and offers a Mining Chest store-points loyalty program (100 points = \u20ac1, redeemable for up to 20% off miners).",
       "founded": null,
       "payout_method": "Direct coinbase (non-custodial).",
       "geographic_presence": "Hetzner, Nuremberg, Germany.",
@@ -1030,8 +1030,8 @@
         "sv2": false
       },
       "notes": "Supports low-hashrate hobby devices and pays 99% directly through the block's coinbase transaction.",
-      "stats_api": "https://btc.heliospool.com/pool/pool.status",
-      "stats_api_type": "ckpool",
+      "stats_api": "https://api.heliospool.com/all.json",
+      "stats_api_type": "helios",
       "first_added_utc": "2025-01-01T00:00:00Z",
       "tagline": "Community Solo Mining Network",
       "description": "HeliosPool is a community-run solo mining pool using a modified CKPool stack. It maintains Bitcoin servers in three continental regions with standard and high-difficulty ports in each. Welcomes everything from small hobby devices to full ASICs.",
@@ -1079,7 +1079,7 @@
       "description": "SoloPool.com is a non-custodial Bitcoin pool offering Solo, Prop+, and an adjustable Solo Split mode where miners choose their shared-reward percentage (0-100%) through the Stratum password field. Operates six named regional endpoints plus a global auto-routing address.",
       "founded": null,
       "payout_method": "Direct coinbase (non-custodial) across all modes. Multi-output coinbase for Prop+/Split.",
-      "geographic_presence": "Los Angeles, New York, Europe, Singapore, Dubai, and São Paulo.",
+      "geographic_presence": "Los Angeles, New York, Europe, Singapore, Dubai, and S\u00e3o Paulo.",
       "fees": {
         "All modes": 2
       },
